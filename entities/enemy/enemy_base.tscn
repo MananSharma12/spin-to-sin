@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://slp0f36hxter"]
 
+[ext_resource type="Script" uid="uid://bo6ld0pkgc1vq" path="res://entities/enemy/enemy_base.gd" id="1_i451i"]
 [ext_resource type="PackedScene" uid="uid://b66i0jofx0i72" path="res://components/health_component.tscn" id="1_x2vhn"]
 [ext_resource type="PackedScene" uid="uid://cuncl3glhx3u5" path="res://components/hitbox_component.tscn" id="2_i451i"]
 
@@ -12,6 +13,7 @@ radius = 16.0
 height = 64.0
 
 [node name="EnemyBase" type="CharacterBody2D" unique_id=1972734964]
+script = ExtResource("1_i451i")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1279667936]
 offset_left = -16.0

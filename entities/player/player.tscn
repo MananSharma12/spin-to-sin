@@ -11,7 +11,7 @@ height = 64.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4vj27"]
 size = Vector2(10, 7)
 
-[node name="Player" type="CharacterBody2D" unique_id=1660210266]
+[node name="Player" type="CharacterBody2D" unique_id=1660210266 groups=["player"]]
 script = ExtResource("1_symyc")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1273591004]
