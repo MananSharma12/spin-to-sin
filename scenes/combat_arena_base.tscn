@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cab5heq0kykkq" path="res://entities/player/player.tscn" id="1_8on37"]
 [ext_resource type="PackedScene" uid="uid://slp0f36hxter" path="res://entities/enemy/enemy_base.tscn" id="2_8ifb5"]
+[ext_resource type="PackedScene" uid="uid://brty5irpeqmso" path="res://UI/hud.tscn" id="3_kuhwg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4vj27"]
 size = Vector2(3009, 143)
@@ -45,3 +46,5 @@ shape = SubResource("RectangleShape2D_5pgbi")
 
 [node name="EnemyBase" parent="." unique_id=1972734964 instance=ExtResource("2_8ifb5")]
 position = Vector2(78, -91)
+
+[node name="HUD" parent="." unique_id=458157675 instance=ExtResource("3_kuhwg")]

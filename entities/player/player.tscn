@@ -23,10 +23,10 @@ offset_right = 16.0
 position = Vector2(0, -32)
 shape = SubResource("CapsuleShape2D_abrql")
 
-[node name="HealthComoponent" parent="." unique_id=330710377 instance=ExtResource("2_sglur")]
+[node name="HealthComponent" parent="." unique_id=330710377 instance=ExtResource("2_sglur")]
 
 [node name="HitboxComponent" parent="." unique_id=657140953 node_paths=PackedStringArray("health_node") instance=ExtResource("3_bls4j")]
-health_node = NodePath("../HealthComoponent")
+health_node = NodePath("../HealthComponent")
 
 [node name="AttackZone" type="Area2D" parent="." unique_id=1040445714]
 

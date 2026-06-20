@@ -26,6 +26,13 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack"):
 		execute_attack()
+	
+	# TEMP DEBUG FLAG: Press the "H" key on your keyboard to test damage binding
+	if event is InputEventKey and event.pressed and event.keycode == KEY_H:
+		var health_node = get_node("HealthComponent") as HealthComponent
+		if health_node:
+			print("Debug: Player intentionally taking 15 damage.")
+			health_node.damage(15.0)
 
 func adjust_attack_range() -> void:
 	if Global.is_god_mode:
