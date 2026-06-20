@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://cll8egyornmh2"]
+
+[ext_resource type="PackedScene" uid="uid://cab5heq0kykkq" path="res://entities/player/player.tscn" id="1_8on37"]
+[ext_resource type="PackedScene" uid="uid://slp0f36hxter" path="res://entities/enemy/enemy_base.tscn" id="2_8ifb5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vj27"]
+size = Vector2(3009, 143)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8ije"]
+size = Vector2(142.06055, 1332.5625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5pgbi"]
+size = Vector2(115, 1401)
+
+[node name="CombatArenaBase" type="Node2D" unique_id=349221680]
+
+[node name="EnemyBase" parent="." unique_id=1972734964 instance=ExtResource("2_8ifb5")]
+position = Vector2(70, 0)
+
+[node name="Player" parent="." unique_id=1660210266 instance=ExtResource("1_8on37")]
+position = Vector2(-156, -45)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1416329277]
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=337660071]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1058368774]
+position = Vector2(0, 73)
+shape = SubResource("RectangleShape2D_4vj27")
+
+[node name="ColorRect" type="ColorRect" parent="Floor" unique_id=370824060]
+offset_left = -1672.0
+offset_right = 1626.0
+offset_bottom = 182.0
+color = Color(0, 1, 1, 1)
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=1838266312]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=298796494]
+position = Vector2(-1579.9697, -511.71875)
+shape = SubResource("RectangleShape2D_p8ije")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=1310438059]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=1362044480]
+position = Vector2(1566.5, -554.5)
+shape = SubResource("RectangleShape2D_5pgbi")

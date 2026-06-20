@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cab5heq0kykkq"]
+
+[ext_resource type="Script" uid="uid://chs7gokykhhpp" path="res://entities/player/player.gd" id="1_symyc"]
+[ext_resource type="PackedScene" uid="uid://b66i0jofx0i72" path="res://components/health_component.tscn" id="2_sglur"]
+[ext_resource type="PackedScene" uid="uid://cuncl3glhx3u5" path="res://components/hitbox_component.tscn" id="3_bls4j"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_abrql"]
+radius = 16.0
+height = 64.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vj27"]
+size = Vector2(10, 7)
+
+[node name="Player" type="CharacterBody2D" unique_id=1660210266]
+script = ExtResource("1_symyc")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1273591004]
+offset_left = -16.0
+offset_top = -64.0
+offset_right = 16.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=33396242]
+position = Vector2(0, -32)
+shape = SubResource("CapsuleShape2D_abrql")
+
+[node name="HealthComoponent" parent="." unique_id=330710377 instance=ExtResource("2_sglur")]
+
+[node name="HitboxComponent" parent="." unique_id=657140953 node_paths=PackedStringArray("health_node") instance=ExtResource("3_bls4j")]
+health_node = NodePath("../HealthComoponent")
+
+[node name="AttackZone" type="Area2D" parent="." unique_id=1040445714]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone" unique_id=940682912]
+position = Vector2(21, -39.5)
+shape = SubResource("RectangleShape2D_4vj27")
