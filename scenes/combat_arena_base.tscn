@@ -57,3 +57,6 @@ visible = false
 color = Color(0.09009846, 0.09009849, 0.09009848, 1)
 
 [node name="RouletteWheelUI" parent="." unique_id=597818239 instance=ExtResource("4_kkywt")]
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=817021488]
+position = Vector2(1456, -1155)

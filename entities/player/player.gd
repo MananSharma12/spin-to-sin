@@ -5,6 +5,7 @@ extends CharacterBody2D
 
 @onready var attack_zone: Area2D = $AttackZone
 @onready var attack_shape: CollisionShape2D = $AttackZone/CollisionShape2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -14,20 +15,30 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction * speed
 		attack_zone.scale.x = sign(direction)
+		
+		sprite.flip_h = (direction < 0)
+		
+		if sprite.sprite_frames.has_animation("run") and sprite.animation != "strike":
+			sprite.play("run")
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
+		if sprite.animation != "strike":
+			sprite.play("idle")
 
 	move_and_slide()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack"):
 		execute_attack()
-		
-	# Catch your custom mapped counter action key
 	if event.is_action_pressed("counter"):
 		execute_counter()
 
 func execute_attack() -> void:
+	if sprite.sprite_frames.has_animation("strike"):
+		sprite.play("strike")
+		if not sprite.animation_finished.is_connected(_on_animation_finished):
+			sprite.animation_finished.connect(_on_animation_finished)
+
 	var overlapping_areas = attack_zone.get_overlapping_areas()
 	for area in overlapping_areas:
 		if area is HitboxComponent:
@@ -36,6 +47,11 @@ func execute_attack() -> void:
 
 func execute_counter() -> void:
 	print("[PLAYER MATCH] Counter action key pressed.")
+	
+	if sprite.sprite_frames.has_animation("counter"):
+		sprite.play("counter")
+		if not sprite.animation_finished.is_connected(_on_animation_finished):
+			sprite.animation_finished.connect(_on_animation_finished)
 	
 	var visual_rect = get_node_or_null("ColorRect") as ColorRect
 	if visual_rect:
@@ -81,3 +97,7 @@ func execute_counter() -> void:
 		Engine.time_scale = 0.05
 		await get_tree().create_timer(0.015, true, false, true).timeout
 		Engine.time_scale = 1.0
+
+func _on_animation_finished() -> void:
+	if sprite.animation == "strike" or sprite.animation == "counter":
+		sprite.play("idle")
