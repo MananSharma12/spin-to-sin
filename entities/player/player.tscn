@@ -8,10 +8,10 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_abrql"]
 radius = 16.0
-height = 64.0
+height = 106.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4vj27"]
-size = Vector2(19, 101)
+size = Vector2(27, 101)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5pgbi"]
 animations = [{
@@ -43,7 +43,7 @@ offset_top = -64.0
 offset_right = 16.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=33396242]
-position = Vector2(0, -32)
+position = Vector2(0, -54)
 shape = SubResource("CapsuleShape2D_abrql")
 
 [node name="HealthComponent" parent="." unique_id=330710377 instance=ExtResource("2_sglur")]
@@ -54,7 +54,7 @@ health_node = NodePath("../HealthComponent")
 [node name="AttackZone" type="Area2D" parent="." unique_id=1040445714]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone" unique_id=940682912]
-position = Vector2(25.5, -52.5)
+position = Vector2(29.5, -52.5)
 shape = SubResource("RectangleShape2D_4vj27")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1186210358]

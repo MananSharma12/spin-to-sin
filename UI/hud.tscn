@@ -5,7 +5,7 @@
 [node name="HUD" type="CanvasLayer" unique_id=458157675]
 script = ExtResource("1_ne75i")
 
-[node name="Healthbar" type="ProgressBar" parent="." unique_id=1004072309]
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1004072309]
 offset_right = 192.0
 offset_bottom = 27.0
 
@@ -14,3 +14,7 @@ offset_top = 4.0
 offset_right = 40.0
 offset_bottom = 27.0
 text = "<3"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1945653165]
+offset_right = 40.0
+offset_bottom = 40.0

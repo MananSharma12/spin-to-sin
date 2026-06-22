@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://cll8egyornmh2"]
 
+[ext_resource type="Script" uid="uid://bkwxy4abl65r1" path="res://scenes/combat_arena_base.gd" id="1_6cos0"]
 [ext_resource type="PackedScene" uid="uid://cab5heq0kykkq" path="res://entities/player/player.tscn" id="1_8on37"]
 [ext_resource type="PackedScene" uid="uid://slp0f36hxter" path="res://entities/enemy/enemy_base.tscn" id="2_8ifb5"]
 [ext_resource type="PackedScene" uid="uid://brty5irpeqmso" path="res://UI/hud.tscn" id="3_kuhwg"]
+[ext_resource type="PackedScene" uid="uid://bkge7hnwy0n6x" path="res://UI/roulette_wheel.tscn" id="4_kkywt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4vj27"]
 size = Vector2(3009, 143)
@@ -14,6 +16,7 @@ size = Vector2(142.06055, 1332.5625)
 size = Vector2(115, 1401)
 
 [node name="CombatArenaBase" type="Node2D" unique_id=349221680]
+script = ExtResource("1_6cos0")
 
 [node name="Player" parent="." unique_id=1660210266 instance=ExtResource("1_8on37")]
 position = Vector2(-156, -45)
@@ -52,3 +55,5 @@ position = Vector2(78, -91)
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1235635526]
 visible = false
 color = Color(0.09009846, 0.09009849, 0.09009848, 1)
+
+[node name="RouletteWheelUI" parent="." unique_id=597818239 instance=ExtResource("4_kkywt")]
