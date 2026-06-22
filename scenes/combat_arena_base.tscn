@@ -48,3 +48,7 @@ shape = SubResource("RectangleShape2D_5pgbi")
 position = Vector2(78, -91)
 
 [node name="HUD" parent="." unique_id=458157675 instance=ExtResource("3_kuhwg")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1235635526]
+visible = false
+color = Color(0.09009846, 0.09009849, 0.09009848, 1)

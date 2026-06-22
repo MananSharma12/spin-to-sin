@@ -3,18 +3,41 @@
 [ext_resource type="Script" uid="uid://chs7gokykhhpp" path="res://entities/player/player.gd" id="1_symyc"]
 [ext_resource type="PackedScene" uid="uid://b66i0jofx0i72" path="res://components/health_component.tscn" id="2_sglur"]
 [ext_resource type="PackedScene" uid="uid://cuncl3glhx3u5" path="res://components/hitbox_component.tscn" id="3_bls4j"]
+[ext_resource type="Texture2D" uid="uid://bml7i77e0mi04" path="res://entities/player/animations/idle/0.png" id="4_fkugw"]
+[ext_resource type="Texture2D" uid="uid://dnvl7bqexm3dc" path="res://entities/player/animations/idle/1.png" id="5_8fjmc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_abrql"]
 radius = 16.0
 height = 64.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4vj27"]
-size = Vector2(10, 7)
+size = Vector2(19, 101)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5pgbi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_fkugw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8fjmc")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 4.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_fkugw"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4vj27"]
+gradient = SubResource("Gradient_fkugw")
+fill_from = Vector2(0.19624573, 0.82764506)
 
 [node name="Player" type="CharacterBody2D" unique_id=1660210266 groups=["player"]]
 script = ExtResource("1_symyc")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1273591004]
+visible = false
 offset_left = -16.0
 offset_top = -64.0
 offset_right = 16.0
@@ -31,5 +54,19 @@ health_node = NodePath("../HealthComponent")
 [node name="AttackZone" type="Area2D" parent="." unique_id=1040445714]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone" unique_id=940682912]
-position = Vector2(21, -39.5)
+position = Vector2(25.5, -52.5)
 shape = SubResource("RectangleShape2D_4vj27")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1186210358]
+position = Vector2(2, -58)
+sprite_frames = SubResource("SpriteFrames_5pgbi")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.19666813
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=637150242]
+visible = false
+position = Vector2(3, -61)
+scale = Vector2(0.98437494, 1.453125)
+color = Color(1, 0.07450981, 0.9411765, 1)
+texture = SubResource("GradientTexture2D_4vj27")
