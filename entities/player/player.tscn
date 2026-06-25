@@ -4,17 +4,34 @@
 [ext_resource type="PackedScene" uid="uid://b66i0jofx0i72" path="res://components/health_component.tscn" id="2_sglur"]
 [ext_resource type="PackedScene" uid="uid://cuncl3glhx3u5" path="res://components/hitbox_component.tscn" id="3_bls4j"]
 [ext_resource type="Texture2D" uid="uid://bml7i77e0mi04" path="res://entities/player/animations/idle/0.png" id="4_fkugw"]
+[ext_resource type="Texture2D" uid="uid://eyqqt0deutai" path="res://entities/player/animations/attack/1_tell.png" id="4_j3ovn"]
 [ext_resource type="Texture2D" uid="uid://dnvl7bqexm3dc" path="res://entities/player/animations/idle/1.png" id="5_8fjmc"]
+[ext_resource type="Texture2D" uid="uid://dnaghsfwvnakj" path="res://entities/player/animations/run/0.png" id="6_bectd"]
+[ext_resource type="Texture2D" uid="uid://caujbve41fhyn" path="res://entities/player/animations/attack/3_smear.png" id="6_gx6sm"]
+[ext_resource type="Texture2D" uid="uid://b6eve1kflwbyk" path="res://entities/player/animations/attack/hurt.png" id="7_j3ovn"]
+[ext_resource type="Texture2D" uid="uid://bbrqxwcb2c1cm" path="res://entities/player/animations/run/1.png" id="7_wvtmh"]
+[ext_resource type="Texture2D" uid="uid://dacgsbwwrvr26" path="res://entities/player/animations/attack/4_recover.png" id="7_yqrof"]
+[ext_resource type="Texture2D" uid="uid://djy6qjn4oebsv" path="res://entities/player/animations/run/2.png" id="8_7thud"]
+[ext_resource type="Texture2D" uid="uid://l0add3d0j416" path="res://entities/player/animations/run/3.png" id="9_a1qjk"]
+[ext_resource type="Texture2D" uid="uid://c7han11edu6yp" path="res://entities/player/animations/run/4.png" id="11_afbqv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_abrql"]
 radius = 16.0
 height = 106.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4vj27"]
-size = Vector2(27, 101)
+size = Vector2(33, 101)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5pgbi"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_j3ovn")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_fkugw")
@@ -25,6 +42,40 @@ animations = [{
 "loop": 1,
 "name": &"idle",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_bectd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wvtmh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7thud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_a1qjk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_afbqv")
+}],
+"loop": 1,
+"name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_j3ovn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gx6sm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yqrof")
+}],
+"loop": 0,
+"name": &"strike",
+"speed": 9.0
 }]
 
 [sub_resource type="Gradient" id="Gradient_fkugw"]
@@ -54,7 +105,7 @@ health_node = NodePath("../HealthComponent")
 [node name="AttackZone" type="Area2D" parent="." unique_id=1040445714]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone" unique_id=940682912]
-position = Vector2(29.5, -52.5)
+position = Vector2(32.5, -52.5)
 shape = SubResource("RectangleShape2D_4vj27")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1186210358]
@@ -62,7 +113,6 @@ position = Vector2(2, -58)
 sprite_frames = SubResource("SpriteFrames_5pgbi")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.19666813
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=637150242]
 visible = false
@@ -70,3 +120,5 @@ position = Vector2(3, -61)
 scale = Vector2(0.98437494, 1.453125)
 color = Color(1, 0.07450981, 0.9411765, 1)
 texture = SubResource("GradientTexture2D_4vj27")
+
+[connection signal="health_altered" from="HealthComponent" to="." method="_on_health_component_health_altered"]

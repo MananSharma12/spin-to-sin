@@ -12,30 +12,42 @@ func _ready() -> void:
 	wave_start_time = Time.get_ticks_msec() / 1000.0
 	spawn_enemy_wave()
 	
-	# Wait one frame for engine node registrations to finalize
 	await get_tree().process_frame
 	wave_activated = true
 
 func spawn_enemy_wave() -> void:
-	# Determine scale: Wave 1 = 2 enemies, Wave 2 = 4 enemies, Wave 3 = 6 enemies...
-	var spawn_count = Global.current_wave * 2
+	var spawn_count = Global.current_wave * 4
 	print("[SPAWNER]: Initializing Wave Layout. Spawning ", spawn_count, " mobsters.")
 	
+	var player = get_tree().get_first_node_in_group("player") as CharacterBody2D
+	var center_x = player.global_position.x if player else 500.0
+	var ground_y = player.global_position.y if player else 400.0
+
 	for i in range(spawn_count):
 		var enemy_instance = enemy_blueprint.instantiate() as CharacterBody2D
 		add_child(enemy_instance)
 		
-		# Stagger their starting horizontal positioning slightly so they don't stack perfectly
-		enemy_instance.global_position = spawn_point.global_position + Vector2(i * 40, 0)
+		enemy_instance.add_to_group("enemies")
+		
+		if i % 2 == 0:
+			enemy_instance.global_position = Vector2(center_x - 300.0 - (i * 50.0), ground_y - 20.0)
+		else:
+			enemy_instance.global_position = Vector2(center_x + 300.0 + (i * 50.0), ground_y - 20.0)
 
 func _process(_delta: float) -> void:
 	if not wave_activated:
 		return
-		
-	var active_enemies = get_tree().get_nodes_in_group("enemies")
-	AudioManager.update_combat_intensity(active_enemies.size())
 	
-	if active_enemies.size() == 0:
+	var raw_group_nodes = get_tree().get_nodes_in_group("enemies")
+	var living_enemies: int = 0
+	
+	for enemy in raw_group_nodes:
+		if "current_state" in enemy and enemy.current_state != 4: # 4 corresponds to State.DEAD
+			living_enemies += 1
+	
+	AudioManager.update_combat_intensity(living_enemies)
+	
+	if living_enemies == 0:
 		wave_activated = false
 		set_process(false) 
 		execute_wave_clear_sequence()

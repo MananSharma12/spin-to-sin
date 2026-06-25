@@ -3,40 +3,103 @@
 [ext_resource type="Script" uid="uid://bo6ld0pkgc1vq" path="res://entities/enemy/enemy_base.gd" id="1_i451i"]
 [ext_resource type="PackedScene" uid="uid://b66i0jofx0i72" path="res://components/health_component.tscn" id="1_x2vhn"]
 [ext_resource type="PackedScene" uid="uid://cuncl3glhx3u5" path="res://components/hitbox_component.tscn" id="2_i451i"]
+[ext_resource type="Texture2D" uid="uid://tr8o141tmrn0" path="res://entities/enemy/animations/A/strike/reaction.png" id="4_jhcb8"]
+[ext_resource type="Texture2D" uid="uid://dedcnkuih0lm5" path="res://entities/enemy/animations/A/idle/A1.png" id="4_nkwmm"]
+[ext_resource type="Texture2D" uid="uid://dtqvgacl76cw5" path="res://entities/enemy/animations/A/idle/A2.png" id="5_h1cmc"]
+[ext_resource type="Texture2D" uid="uid://cbjuaddgnflry" path="res://entities/enemy/animations/A/run/0.png" id="7_jrxn4"]
+[ext_resource type="Texture2D" uid="uid://kkjjpdrkgg5g" path="res://entities/enemy/animations/A/run/1.png" id="8_vcwyy"]
+[ext_resource type="Texture2D" uid="uid://drv85xpsvgx1n" path="res://entities/enemy/animations/A/run/2.png" id="9_daws2"]
+[ext_resource type="Texture2D" uid="uid://do7np4i41dbgr" path="res://entities/enemy/animations/A/run/3.png" id="10_nj81f"]
+[ext_resource type="Texture2D" uid="uid://80jyulwfwbdl" path="res://entities/enemy/animations/A/strike/tell.png" id="11_m3vfr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4vj27"]
 radius = 16.0
-height = 64.0
+height = 110.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8ije"]
 radius = 16.0
-height = 64.0
+height = 110.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j3ovn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_nkwmm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_h1cmc")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_jhcb8")
+}],
+"loop": 0,
+"name": &"reaction",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_jrxn4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vcwyy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_daws2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nj81f")
+}],
+"loop": 1,
+"name": &"run",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_m3vfr")
+}],
+"loop": 1,
+"name": &"tell",
+"speed": 4.0
+}]
 
 [node name="EnemyBase" type="CharacterBody2D" unique_id=1972734964 groups=["enemies"]]
 script = ExtResource("1_i451i")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1279667936]
+visible = false
 offset_left = -16.0
 offset_top = -64.0
 offset_right = 16.0
 color = Color(1, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1674668523]
-position = Vector2(0, -32)
+position = Vector2(0, -55)
 shape = SubResource("CapsuleShape2D_4vj27")
 
 [node name="CounterIndicator" type="ColorRect" parent="." unique_id=210618102]
 offset_left = -4.0
-offset_top = -74.0
+offset_top = -120.0
 offset_right = 4.0
-offset_bottom = -66.0
+offset_bottom = -112.0
 color = Color(1, 1, 0, 1)
 
 [node name="HealthComoponent" parent="." unique_id=330710377 instance=ExtResource("1_x2vhn")]
 
 [node name="HitboxComponent" parent="." unique_id=657140953 node_paths=PackedStringArray("health_node") instance=ExtResource("2_i451i")]
+position = Vector2(0, -1)
 health_node = NodePath("../HealthComoponent")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent" unique_id=628553881]
-position = Vector2(0, -32)
+position = Vector2(0, -55)
 shape = SubResource("CapsuleShape2D_p8ije")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1724496120]
+position = Vector2(1, -58)
+sprite_frames = SubResource("SpriteFrames_j3ovn")
+animation = &"reaction"
+autoplay = "idle"
